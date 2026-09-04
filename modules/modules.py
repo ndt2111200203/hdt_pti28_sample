@@ -53,18 +53,46 @@ class CarManager():
         return None                     # Nếu không tìm thấy --> Trả về None
 
     # Phương thức thêm đối tượng ô tô
-    def add_car():
-        pass
+    def add_car(self, car_dict):
+        car = CarInit(model = car_dict["model"],
+                        brand = car_dict["brand"],
+                        color = car_dict["color"],
+                        capacity = car_dict["capacity"])
+        self.car_list.append(car)
+        self.car_list_dict.append(car_dict)
+        write_car(self.car_list_dict)
 
     # Phương thức sửa đối tượng ô tô tìm được theo model
-    def edit_car():
-        pass
+    def edit_car(self, car_model, new_car):
+        # Tìm ô tô có model giống model được truyền vào
+        matched = self.get_car_by_model(car_model)
+
+        # Nếu tìm được
+        if matched != None:
+            # Thực hiện sửa dữ liệu dựa trên dữ liệu người dùng cập nhật vào
+            matched.model = new_car.get("model", matched.model)
+            matched.brand = new_car.get("brand", matched.brand)
+            matched.color = new_car.get("color", matched.color)
+            matched.capacity = new_car.get("capacity", matched.capacity)
+
+        # Ghi dữ liệu vào json
+        self.car_list_dict = [car.__dict__ for car in self.car_list]
+        write_car(self.car_list_dict)
 
     # Phương thức xóa đối tượng ô tô tìm được theo model
-    def delete_car():
-        pass
+    def delete_car(self, car_model):
+        # Tìm ô tô có model giống model được truyền vào
+        matched = self.get_car_by_model(car_model)
+
+        # Nếu tìm thấy
+        if matched != None:
+            self.car_list.remove(matched) # Xóa ô tô tìm thấy
+            # Cập nhật dữ liệu mới sau khi xóa vào json
+            self.car_list_dict = [car.__dict__ for car in self.car_list]
+            write_car(self.car_list_dict)
 
 staff = CarManager()
+
 print(staff.car_list)
 staff.load_data()
 print(staff.car_list)

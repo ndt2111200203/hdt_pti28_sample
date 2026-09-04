@@ -2,17 +2,6 @@
 
 # Khai báo các thư viện cần thiết
 from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
-from PyQt6 import QtCore
 import sys
 import os
 import PyQt6.QtWidgets as QtWidgets
