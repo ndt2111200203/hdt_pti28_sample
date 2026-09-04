@@ -1,0 +1,20 @@
+[
+    {
+        "model": "VF3",
+        "brand": "VinFast",
+        "color": "Blue",
+        "capacity": 5
+    },
+    {
+        "model": "VF5",
+        "brand": "VinFast",
+        "color": "Red",
+        "capacity": 4
+    },
+    {
+        "model": "VF8",
+        "brand": "VinFast",
+        "color": "Black",
+        "capacity": 5
+    }
+]
