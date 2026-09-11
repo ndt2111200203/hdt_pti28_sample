@@ -91,11 +91,46 @@ class MainWindow(QMainWindow):
 
     # Phương thức sửa đối tượng
     def edit(self):
-        pass
+        curr = self.listWidget.currentRow() # Lấy dòng đang chọn
+
+        if curr == -1:
+            QMessageBox.warning(self, "Warning", "Vui lòng chọn một dòng để sửa")
+            return
+
+        model = self.listWidget.currentItem().text()
+        car = self.car_manager.get_car_by_model(model) # Tìm kiếm ô tô có model trùng với model đang chọn
+
+        if not car:
+            QMessageBox.warning(self, "Warning", "Không thấy ô tô đang chọn, vui lòng kiểm tra lại")
+            return
+
+        dialog_edit = dialog.Dialog()
+        dialog_edit.stackedWidget.setCurrentIndex(1)
+        dialog_edit.show_data_edit(car)
+
+        if dialog_edit.exec():
+            new_data = dialog_edit.return_data_edit() # lấy dữ liệu người dùng nhập vào
+            self.car_manager.edit_car(model, new_data)
+            # self.listWidget.clear()
+            # self.listWidget.addItems(self.car_manager.get_model_list())
 
     # Phương thức xóa đối tượng
     def delete(self):
-        pass
+        curr = self.listWidget.currentRow() # Lấy dòng đang chọn
+
+        if curr == -1:
+            QMessageBox.warning(self, "Warning", "Vui lòng chọn một dòng để xóa")
+            return
+
+        model = self.listWidget.currentItem().text()
+        car = self.car_manager.get_car_by_model(model) # Tìm kiếm ô tô có model trùng với model đang chọn
+        
+        reply = QMessageBox.question(self, "Confirm", f'Bạn có chắc muốn xóa ô tô {model} không?', QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if reply == QMessageBox.StandardButton.Yes:
+            self.listWidget.takeItem(curr)
+            self.car_manager.delete_car(model)
+            QMessageBox.information(self, "Sucess", f"Đã xóa thành công ô tô {model}")
 
 # Hàm main chạy chương trình
 if __name__ == '__main__':
