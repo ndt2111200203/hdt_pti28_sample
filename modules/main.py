@@ -10,7 +10,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt6 import uic
 
 # Nhập các modules cần thiết từ các file khác
-import modules
+import modules, dialog
 
 # Khai báo đường dẫn tổng của project
 BASE_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -71,6 +71,10 @@ class MainWindow(QMainWindow):
         super().__init__()
         uic.loadUi(MAIN_PATH, self)
 
+        # Tạo đối tượng quản lý danh sách car
+        self.car_manager = modules.CarManager()
+        self.car_manager.load_data()
+
         # Các events click button
         self.m_add.clicked.connect(self.add)         # Thêm
         self.m_edit.clicked.connect(self.edit)       # Sửa
@@ -78,7 +82,12 @@ class MainWindow(QMainWindow):
 
     # Phương thức thêm đối tượng
     def add(self):
-        pass
+        dialog_add = dialog.Dialog()
+
+        if dialog_add.exec():
+            inputs = dialog_add.return_data_add() # lấy dữ liệu người dùng nhập vào
+            self.listWidgets.addItem(inputs["model"]) # Thêm dữ liệu vào danh sách hiển thị
+            self.car_manager.add_car(inputs) # Thêm dữ liệu vào json
 
     # Phương thức sửa đối tượng
     def edit(self):
