@@ -14,6 +14,9 @@ class Dialog(QDialog):
         super().__init__()
         uic.loadUi(DIALOG_PATH, self)
 
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+
     # Phương thức trả về dữ liệu khi thêm car
     def return_data_add(self) -> dict:
         return {
