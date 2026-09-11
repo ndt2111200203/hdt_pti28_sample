@@ -16,5 +16,11 @@
         "brand": "VinFast",
         "color": "Black",
         "capacity": 5
+    },
+    {
+        "model": "VF3",
+        "brand": "Vinfast",
+        "color": "Blue",
+        "capacity": "2"
     }
 ]

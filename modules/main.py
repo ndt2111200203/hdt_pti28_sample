@@ -86,7 +86,7 @@ class MainWindow(QMainWindow):
 
         if dialog_add.exec():
             inputs = dialog_add.return_data_add() # lấy dữ liệu người dùng nhập vào
-            self.listWidgets.addItem(inputs["model"]) # Thêm dữ liệu vào danh sách hiển thị
+            self.listWidget.addItem(inputs["model"]) # Thêm dữ liệu vào danh sách hiển thị
             self.car_manager.add_car(inputs) # Thêm dữ liệu vào json
 
     # Phương thức sửa đối tượng
