@@ -74,6 +74,7 @@ class MainWindow(QMainWindow):
         # Tạo đối tượng quản lý danh sách car
         self.car_manager = modules.CarManager()
         self.car_manager.load_data()
+        self.listWidget.addItems(self.car_manager.get_model_list())
 
         # Các events click button
         self.m_add.clicked.connect(self.add)         # Thêm
@@ -111,8 +112,8 @@ class MainWindow(QMainWindow):
         if dialog_edit.exec():
             new_data = dialog_edit.return_data_edit() # lấy dữ liệu người dùng nhập vào
             self.car_manager.edit_car(model, new_data)
-            # self.listWidget.clear()
-            # self.listWidget.addItems(self.car_manager.get_model_list())
+            self.listWidget.clear()
+            self.listWidget.addItems(self.car_manager.get_model_list())
 
     # Phương thức xóa đối tượng
     def delete(self):

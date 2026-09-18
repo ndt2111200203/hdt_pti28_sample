@@ -91,8 +91,9 @@ class CarManager():
             self.car_list_dict = [car.__dict__ for car in self.car_list]
             write_car(self.car_list_dict)
 
-staff = CarManager()
-
-print(staff.car_list)
-staff.load_data()
-print(staff.car_list)
+    # Phương thức lấy danh sách model của ô tô
+    def get_model_list(self):
+        model_list = list()
+        for car in self.car_list:
+            model_list.append(car.model)
+        return model_list

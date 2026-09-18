@@ -22,7 +22,7 @@ class Dialog(QDialog):
         return {
             "model": self.add_model.text(),
             "brand": self.add_brand.text(),
-            "color": self.add_color.text(),
+            "color": self.add_color.text(), 
             "capacity": self.add_capacity.text()
         }
 
